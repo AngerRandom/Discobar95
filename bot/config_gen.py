@@ -16,4 +16,4 @@ def generate_config():
       print("[LOG] Configuration file generated successfully.")
 
   else:
-    print("Configuration file already exists.")
+    print("[WARNING] Configuration file already exists.")
