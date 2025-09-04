@@ -10,7 +10,7 @@ def generate_config():
   database_url = ""
   prefix = ""
   """
-  if not Path(file).exists()
+  if not Path(file).exists():
     with open(file, "w") as f:
       f.write(content)
       print("[LOG] Configuration file generated successfully.")
