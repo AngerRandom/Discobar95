@@ -40,6 +40,7 @@ async def init_db():
         sys.exit(1) 
 
 async def extension_loader():
+  print("[INFO] Attempting to load the extensions...")
   for extension_name in config.extensions:
     try:
       await bot.load_extension(f"extensions.{extension_name}")
@@ -47,3 +48,17 @@ async def extension_loader():
     except Exception as e:
       print(f"[ERROR] Extension {extension_name} failed to load.")
       traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
+
+@bot.event()
+async def on_ready():
+  print(f"[INFO] Bot logged in as user {bot.user} (ID: {bot.user.id}).")
+
+async def main():
+  async with bot:
+    await init_db()
+    await extension_loader()
+    if not config.bot_token:
+      print("[WARNING] Bot token not found! Please set one in config.py.")
+      sys.exit(1)
+    else:
+      await bot.start(config.bot_token)
