@@ -1,0 +1,14 @@
+config.py
+*.pyc
+__pycache__
+.DS_Store
+*.egg-info
+dist
+build
+venv
+.venv
+.python-version
+.vscode
+*sqlite3*
+*.rdb
+pgbackups
