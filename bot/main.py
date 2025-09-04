@@ -2,6 +2,8 @@ from pathlib import Path
 import discord
 import logging
 from discord.ext import commands
+from tortoise import Tortoise
+from bot.core.tortoise_orm import TORTOISE_ORM
 import asyncpg
 import asyncio
 import sys
@@ -29,8 +31,9 @@ async def init_db():
     sys.exit(1)
   else:
     try:
-        bot.db_pool = await asyncpg.create_pool(dsn=config.database_url)
-        print("[INFO] Database is ready.")
+        await Tortoise.init(config=TORTOISE_ORM)
+        await Tortoise.generate_schemas()
+        print("[INFO] Tortoise ORM & database is ready.")
     except Exception as e:
         print("[ERROR] Failed to connect to database.")
         traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
