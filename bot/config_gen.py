@@ -13,7 +13,7 @@ def generate_config():
   if not Path(file).exists():
     with open(file, "w") as f:
       f.write(content)
-      print("[LOG] Configuration file generated successfully.")
+      print("[INFO] Configuration file generated successfully.")
 
   else:
     print("[WARNING] Configuration file already exists.")
