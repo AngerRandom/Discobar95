@@ -62,3 +62,6 @@ async def main():
       sys.exit(1)
     else:
       await bot.start(config.bot_token)
+
+if __name__ == "__main__":
+    asyncio.run(main())
