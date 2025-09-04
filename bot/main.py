@@ -5,8 +5,9 @@ from discord.ext import commands
 import asyncpg
 import asyncio
 
-if not Path("config.py").exists():
+if not Path("./config.py").exists():
   print("[WARNING] Configuration file not found. Please generate it by running the config generator.")
+  return
 else:
   import config
 
@@ -17,3 +18,8 @@ intents.message_content = True
 if not config.prefix:
   print("[WARNING] Bot text prefix is missing. Please set it in config.py.")
   return
+bot = commands.Bot(command_prefix=config.prefix, intents=intents)
+bot.db_pool = asyncpg.Pool = None
+
+async def init_db():
+  if not config.db
