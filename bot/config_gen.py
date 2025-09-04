@@ -1,7 +1,7 @@
 from pathlib import Path
 
 def generate_config():
-  file = "config.py"
+  file = "./config.py"
   content = """
   # Generated with config_gen.py
   # Configure the needed stuff here
