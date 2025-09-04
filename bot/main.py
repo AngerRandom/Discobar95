@@ -38,3 +38,12 @@ async def init_db():
         print("[ERROR] Failed to connect to database.")
         traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
         sys.exit(1) 
+
+async def extension_loader():
+  for extension_name in config.extensions:
+    try:
+      await bot.load_extension(f"extensions.{extension_name}")
+      print(f"[INFO] Extension {extension_name} loaded successfully.")
+    except Exception as e:
+      print(f"[ERROR] Extension {extension_name} failed to load.")
+      traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
