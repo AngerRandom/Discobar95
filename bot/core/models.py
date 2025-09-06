@@ -3,6 +3,11 @@ from enum import IntEnum
 from datetime import datetime, timedelta
 import discord
 
+class DiscordSnowflakeValidator(validators.Validator):
+    def __call__(self, value: int):
+        if not 17 <= len(str(value)) <= 19:
+            raise exceptions.ValidationError("Discord IDs are between 17 and 19 characters long")
+
 class OperatingSystemType(IntEnum):
   PROGRESSBAR = 1
   BAROS = 2
@@ -12,7 +17,11 @@ class OperatingSystemType(IntEnum):
 
 class OperatingSystem(models.Model):
   id = fields.IntField(primary_key=True)
-  name = fields.CharField(max_length=64, description="Name of the operating system")
+  name = fields.CharField(
+    max_length=64, 
+    description="Name of the operating system",
+    unique=True
+  )
   type = fields.IntEnumField(
     OperatingSystemType,
     description="Type of the operating system",
@@ -42,6 +51,13 @@ class OperatingSystem(models.Model):
     description="JSON object of wallpapers of the operaring system",
     default={},
     null=True
+  )
+
+class Player(models.Model):
+  discord_id = fields.BigIntField(
+    description="Discord user ID of the player",
+    unique=True,
+    validators=[DiscordSnowflakeValidator()]
   )
   
   
