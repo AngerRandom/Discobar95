@@ -22,5 +22,13 @@ class OperatingSystem(models.Model):
     description="If enabled, the oprerating system will be listed in custom operating systems.", 
     default=False
   )
+  pro_level = fields.IntField(
+    description="Amount of levels required to reach Pro rank",
+    validators=[validators.MaxValueValidator(99), validators.MinValueValidator(1)],
+  )
+  bonus_points = fields.IntField(
+    description="Bonus points an operating system can give per level clear",
+    default=0
+  )
   
   
