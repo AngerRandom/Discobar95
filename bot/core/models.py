@@ -30,5 +30,18 @@ class OperatingSystem(models.Model):
     description="Bonus points an operating system can give per level clear",
     default=0
   )
+  box_image = fields.CharField(
+    max_length=200,
+    description="Image asset of the box"
+  )
+  logo_image = fields.CharField(
+    max_length=200,
+    description="Image asset of the logo"
+  )
+  wallpapers = fields.JSONField(
+    description="JSON object of wallpapers of the operaring system",
+    default={},
+    null=True
+  )
   
   
